@@ -1,7 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers().AddJson();(Optiopns => options.JsonSerializerOptions.PropertyNamingoPolicy = null);
+builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
