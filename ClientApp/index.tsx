@@ -1,5 +1,5 @@
 // ClientApp/index.tsx
-import React from 'react';
+import React from "react";
 import { createRoot } from 'react-dom/client';
 import { components } from './components';
 
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const propsData = rootElement.getAttribute('data-props');
 
   if (!componentName || !(componentName in components)) {
-    console.error(`Componente "${componentName}" no encontrado.`);
+    console.error(`Componente "${componentName}" no encontrado en el objeto 'components'.`);
     return;
   }
 
@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       props = JSON.parse(propsData);
     } catch (e) {
-      console.log(propsData);
       console.error('Error al parsear data-props:', e);
+      return;
     }
   }
 
-  const Component = components[componentName];
+  const Component = components[componentName as keyof typeof components];
   const root = createRoot(rootElement);
   root.render(<Component {...props} />);
 });
